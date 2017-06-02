@@ -12,6 +12,7 @@ App will be launched at port 3001. User log-in logs can be found in logs/debug.l
     $ git clone git@github.com:CorwinCZ/memsource.git
     $ cd memsource
     $ yarn install
+    $ mkdir logs
     $ cd frontend && yarn install
 
 ## Run app
