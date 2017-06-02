@@ -6,6 +6,7 @@ var router = express.Router();
 
 let memsourceURL = 'https://cloud.memsource.com/web/';
 
+// logs user into memesource API and logs every log-in attempt to logs/debug.log
 router.post('/login', (req, res, next) => {
   logger.debug({
     userName: req.body.userName, 
@@ -24,7 +25,7 @@ router.post('/login', (req, res, next) => {
   let loginURL = `${memsourceURL}${endpoint}?userName=${req.body.userName}&password=${req.body.password}`
 
   fetch(loginURL, requestData)
-    .catch(err => {console.log('Fetch error', err)})
+    .catch(err => {logger.error({error: err})})
     .then(response => response.json())
     .then(result => {
       console.log('Vrátilo se', result);
@@ -37,6 +38,7 @@ router.post('/login', (req, res, next) => {
 });
 
 // gets project list from Memsource API and returns it to requester
+// requires API token to be accesible in req obejct
 router.post('/project', (req, res, next) => {
   let endpoint = 'api/v4/project/list';
 
@@ -51,7 +53,7 @@ router.post('/project', (req, res, next) => {
   let requestURL = `${memsourceURL}${endpoint}?token=${req.body.token}`
 
   fetch(requestURL, requestData)
-    .catch(err => {console.log('Fetch error', err)})
+    .catch(err => {logger.error({error: err})})
     .then(response => response.json())
     .then(result => {
       res.send({
