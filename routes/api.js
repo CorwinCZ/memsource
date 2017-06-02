@@ -10,8 +10,7 @@ let memsourceURL = 'https://cloud.memsource.com/web/';
 router.post('/login', (req, res, next) => {
   logger.debug({
     userName: req.body.userName, 
-    password: req.body.password,
-  }, `User is atemting to log-in with these credentials: userName=${req.body.userName} password=${req.body.password}`)
+  }, `User is atemting to log-in with these credentials: userName=${req.body.userName}`)
   
   let endpoint = 'api/v3/auth/login';
 
@@ -56,8 +55,7 @@ router.post('/project', (req, res, next) => {
     .then(result => {
       res.send({
         data: result.projects
-      });    
-
+      });
     });  
 });
 

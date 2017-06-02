@@ -1,5 +1,7 @@
 # Test app for Memsource
 
+App will be launched at port 3001. User log-in logs can be found in logs/debug.log 
+
 ## Requirements
 
     yarn
@@ -16,3 +18,6 @@
 
     $ cd <app root> 
     $ yarn run-all
+
+## Logs
+    $ ./node_modules/bunyan/bin/bunyan logs/debug.log

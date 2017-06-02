@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
+// Renders data passed in data prop into table
 class ProjectTable extends Component {
 	render() {
-		console.log('data', this.props.data);
-
 		return (
 			<Table
         selectable={false}

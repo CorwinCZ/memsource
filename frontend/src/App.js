@@ -5,6 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { LoginForm } from './components';
 import { DataLoader } from './components';
 
+// material-ui is registering nad handling tap events for mobile deices, it needes this inject plugin
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 

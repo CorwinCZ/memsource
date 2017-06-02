@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ProjectTable from './ProjectTable.js';
 import RaisedButton from 'material-ui/RaisedButton';
 
+// DataLoader is responsible for loading data and passing them to ProjectTable component
+// requires prop "endpoint" - is will be used as final part of get parameter
 class DataLoader extends Component {
 	constructor(props) {
 		super(props);
@@ -26,7 +28,6 @@ class DataLoader extends Component {
 			.catch(err => console.log('Error', err))
 			.then(response => response.json())
 			.then(data => {
-				console.log('Navrátila se tato data', data);
 				this.setState({
 					loading:false,
 					data: data.data,
@@ -45,7 +46,7 @@ class DataLoader extends Component {
 		}
 		return (
 			<div>
-				<RaisedButton className="Margin-top" label="Reload table" primary={true} onClick={this.loadData.bind(this)}/>
+				<RaisedButton className="Margin-top" label="Reload table" primary={true} onClick={this.loadData.bind(this)}  />
 				<ProjectTable data={this.state.data} />
 			</div>
 		)

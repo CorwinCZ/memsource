@@ -3,6 +3,8 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import '../App.css';
 
+// Handles login process
+// requires updateToken prop - it will be used to pass token up to parrent
 class LoginForm extends Component {
 	constructor(props) {
 		super(props);
@@ -39,7 +41,6 @@ class LoginForm extends Component {
 			.catch(err => console.log('Error', err))
 			.then(response => response.json())
 			.then(data => {
-				console.log('Data', data)
 				if(data.error) {
 					this.setState({
 						'error': data.error,
@@ -67,6 +68,7 @@ class LoginForm extends Component {
 				/><br />
 				<TextField
 					hintText="Password"
+					type="password"
 					onChange={this.handlePassword}
 				/><br />
 				<RaisedButton label="Log in" primary={true} onClick={this.submitLogIn.bind(this)}/>
@@ -75,6 +77,8 @@ class LoginForm extends Component {
 	}
 }
 
+// Holds information if user is logged
+// Passes recieved token to its children
 class LoginPage extends Component {
 	constructor(props) {
 		super(props);
