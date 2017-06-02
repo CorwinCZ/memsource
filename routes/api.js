@@ -7,9 +7,29 @@ var router = express.Router();
 
 let memsourceURL = 'https://cloud.memsource.com/web/';
 
-router.get('/test', (req, res, next) => {
+// gets project list from Memsource API and returns it to requester
+router.get('/project', (req, res, next) => {
+  let endpoint = 'api/v4/project/list';
 
-  res.send({"máme": req.APIToken});
+  let requestData = {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({}),
+  }
+
+  let requestURL = `${memsourceURL}${endpoint}?token=${req.APIToken}`
+
+  fetch(requestURL, requestData)
+    .catch(err => {console.log('Fetch error', err)})
+    .then(response => response.json())
+    .then(result => {
+      res.send({
+        data: result.projects
+      });    
+
+    });  
 });
 
 // Logs into Memsource API, then stores acces token into req object
