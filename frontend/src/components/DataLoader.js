@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ProjectTable from './ProjectTable.js';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class DataLoader extends Component {
 	constructor(props) {
@@ -43,7 +44,10 @@ class DataLoader extends Component {
 			return <div>Loading...</div>
 		}
 		return (
-			<ProjectTable data={this.state.data} />
+			<div>
+				<RaisedButton className="Margin-top" label="Reload table" primary={true} onClick={this.loadData.bind(this)}/>
+				<ProjectTable data={this.state.data} />
+			</div>
 		)
 	}
 }
