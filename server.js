@@ -3,6 +3,7 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
+import fs from 'fs';
 
 import index from './routes/index';
 import api from './routes/api';
@@ -14,6 +15,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+fs.existsSync('./logs') || fs.mkdirSync('./logs');
 
 app.use('/', index);
 

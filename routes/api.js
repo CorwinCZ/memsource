@@ -1,13 +1,17 @@
 import express from 'express';
 import fetch from 'node-fetch';
-
-import config from '../apiconfig.json';
+import { logger } from '../logger.js';
 
 var router = express.Router();
 
 let memsourceURL = 'https://cloud.memsource.com/web/';
 
 router.post('/login', (req, res, next) => {
+  logger.debug({
+    userName: req.body.userName, 
+    password: req.body.password,
+  }, `User is atemting to log-in with these credentials: userName=${req.body.userName} password=${req.body.password}`)
+  
   let endpoint = 'api/v3/auth/login';
 
   let requestData = {
