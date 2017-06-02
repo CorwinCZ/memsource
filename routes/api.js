@@ -7,8 +7,33 @@ var router = express.Router();
 
 let memsourceURL = 'https://cloud.memsource.com/web/';
 
+router.post('/login', (req, res, next) => {
+  let endpoint = 'api/v3/auth/login';
+
+  let requestData = {
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
+
+  let loginURL = `${memsourceURL}${endpoint}?userName=${req.body.userName}&password=${req.body.password}`
+
+  fetch(loginURL, requestData)
+    .catch(err => {console.log('Fetch error', err)})
+    .then(response => response.json())
+    .then(result => {
+      console.log('Vrátilo se', result);
+      
+      if(!result.token) {
+        res.send({error: result.errorCode})
+      }
+      res.send({'token': result.token})
+    });
+});
+
 // gets project list from Memsource API and returns it to requester
-router.get('/project', (req, res, next) => {
+router.post('/project', (req, res, next) => {
   let endpoint = 'api/v4/project/list';
 
   let requestData = {
@@ -19,7 +44,7 @@ router.get('/project', (req, res, next) => {
     body: JSON.stringify({}),
   }
 
-  let requestURL = `${memsourceURL}${endpoint}?token=${req.APIToken}`
+  let requestURL = `${memsourceURL}${endpoint}?token=${req.body.token}`
 
   fetch(requestURL, requestData)
     .catch(err => {console.log('Fetch error', err)})
@@ -31,27 +56,5 @@ router.get('/project', (req, res, next) => {
 
     });  
 });
-
-// Logs into Memsource API, then stores acces token into req object
-export function memsourceAPILoginMiddleware(req, res, next) {
-  let endpoint = 'api/v3/auth/login';
-
-  let requestData = {
-    method: 'get',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }
-
-  let loginURL = `${memsourceURL}${endpoint}?userName=${config.userName}&password=${config.password}`
-
-  fetch(loginURL, requestData)
-    .catch(err => {console.log('Fetch error', err)})
-    .then(response => response.json())
-    .then(result => {
-      req.APIToken = result.token;
-      next();
-    });
-}
 
 export default router;

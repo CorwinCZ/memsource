@@ -12,7 +12,16 @@ class DataLoader extends Component {
 
 	loadData() {
 		this.setState({loading: true});
-		fetch(this.props.endpoint)
+		let requestData = {
+			method: 'post',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				token: this.props.token,
+			}),
+		}
+		fetch(this.props.endpoint, requestData)
 			.catch(err => console.log('Error', err))
 			.then(response => response.json())
 			.then(data => {
