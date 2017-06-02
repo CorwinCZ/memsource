@@ -1,18 +1,18 @@
-# This applicatio nwas created as test for company Memsource
+# Test app for Memsource
 
-# Requirements
+## Requirements
 
     yarn
     node 7.7.4
 
-# Install app
+## Install app
 
     $ git clone git@github.com:CorwinCZ/memsource.git
     $ cd memsource
     $ yarn install
     $ cd frontend && yarn install
 
-# Run app
+## Run app
 
     $ cd <app root> 
     $ yarn run-all

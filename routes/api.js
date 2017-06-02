@@ -27,9 +27,7 @@ router.post('/login', (req, res, next) => {
   fetch(loginURL, requestData)
     .catch(err => {logger.error({error: err})})
     .then(response => response.json())
-    .then(result => {
-      console.log('Vrátilo se', result);
-      
+    .then(result => {      
       if(!result.token) {
         res.send({error: result.errorCode})
       }
